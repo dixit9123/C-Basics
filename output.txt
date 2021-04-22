@@ -1,0 +1,6 @@
+/home/user1/work/src/c/main.c
+/home/user1/work/src/py/parser.pyc
+/home/user1/work/src/py/parser.py
+/home/user1/work/hdr/misc/parser.h
+/home/user1/work/hdr/misc/util.h
+/home/user1/work/build/misc/exe
