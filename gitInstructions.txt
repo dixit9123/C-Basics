@@ -1,0 +1,136 @@
+git --version
+	lets you check version
+
+git config --global user.name
+					user.email
+
+	-setting config values
+
+
+git config --list
+
+	-lists all the settings
+
+git action --help
+
+	-will pull up manual
+
+git init
+	
+	-will make local terminal on your device
+	ls -la will show git file in the directory
+
+git status
+
+	-will show untracked file
+
+touch .gitignore
+
+	-creates a gitignore file
+	-simple text file made to ignore files in directories 
+	-name of files
+	-*.pyc (ignore all .pyc files)
+
+
+
+git add -A
+
+	-will add files(ready for commit) 
+
+
+
+git reset filename
+
+	-will unadd file for commit
+
+
+
+git commit -m 'message'
+
+	-commits files ready to push
+
+
+
+git log
+
+	-will log each commit
+
+
+
+git clone <url> <destination>
+
+	git clone <url> . will copy into current directory
+
+git remote -v
+
+	-will give location of repository
+
+
+
+git branch -a
+	-will list all branches
+
+
+
+git diff
+	-changes made to code
+
+
+git pull origin master
+	-to see if anything has changed
+	-origin name of repo
+	-master name of branch
+
+git push origin master
+	same as above but to send update
+
+
+git branch <name>
+	makes new branch
+
+git checkout <name>
+	cd into new branch
+
+
+git push -u origin <name of branch>
+	push to new branch
+
+git branch -a
+	list all branch 
+		remote and local
+
+
+Merging 2 branches
+	git checkout master
+		move to master
+
+	git pull origin master
+		pull to see any changes
+
+	git branch --merged 
+		look at merged branches
+
+ 	git merge <name>
+		merge branches
+
+	git push origin master
+		push master
+
+Deleting A Branch
+	git branch -d <name>
+		delete local branch
+
+	git push --delete <name>
+		delete remote branch
+
+
+
+
+
+
+
+
+
+
+
+
