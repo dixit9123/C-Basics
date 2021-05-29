@@ -1,35 +1,75 @@
 #include "sequence.h"
 
+void sort(long*, int);
+
 long *Generate_2p3q_Seq(int n, int *seq_size)
 {
-    int power2,power2and3;
-    long *arr;
-    
-    while(power2 < n)
+    int power2=1;
+    int power2and3=1;
+    if(n==0)
     {
+        *seq_size=0;
+        return 0;
+    } 
+    while(n>power2)
+    {
+        (*seq_size)++;
         power2and3=power2;
-        while(power2and3 < n)
+        while(n>power2and3)
         {
-            *seq_size++;
             power2and3*=3;
+            if(n>power2and3)
+            {
+                (*seq_size)++;
+            }
         }
         power2*=2;
     }
-    printf("Length = %d", *seq_size);
-    *arr = malloc(sizeof(long)*(*seq_size));
-    
-    if(*arr==NULL)
+    power2=1;
+    power2and3=1;
+    long* arr=malloc(sizeof(long)*(*seq_size));
+    if(arr==NULL)
     {
         *seq_size=0;
         return NULL;
     }
-    return NULL;
+    int index=0;
+    while(n>power2)
+    {
+        arr[index]=power2;
+        index++;
+        power2and3=power2;
+        while(n>power2and3)
+        {
+            power2and3*=3;
+            if(n>power2and3)
+            {
+                arr[index]=power2and3;
+                index++;
+            }
+        }
+        power2*=2;
+    }
+    sort(arr, *seq_size);
+    return arr;
+
 }
 
-int main(void)
+void sort(long *arr, int n)
 {
-    int n=16;
-    int *seq_s=0;
-    Generate_2p3q_Seq(n, seq_s);
-    printf("%d", seq_s);
+    int min;
+    for(int i =0; i<n-1; i++)
+    {
+        min=i;
+        for(int j=i+1; j<n; j++)
+        {
+            if(arr[j]<arr[min])
+            {
+                min = j;
+            }
+        }
+        long temp=arr[min];
+        arr[min]=arr[i];
+        arr[i]=temp;
+    }
 }

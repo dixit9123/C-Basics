@@ -11,5 +11,7 @@ run:
 %.o: %.c $(HDR)
 	gcc -g -Wall -Werror -c $<
 
+mem:
+	valgrind ./exe
 clean:
 	rm exe *.o output.txt

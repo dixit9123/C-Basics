@@ -2,6 +2,7 @@
 #define __SEQUENCE_H__
 
 #include <stdio.h>
+#include <stdlib.h>
 
 long *Generate_2p3q_Seq(int n, int *seq_size);
 
