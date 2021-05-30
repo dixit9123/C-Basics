@@ -1,5 +1,5 @@
-SRC=main.c sequence.c
-HDR=sequence.h
+SRC=main.c sequence.c shell_array.c
+HDR=sequence.h shell_array.h
 OBJ=$(patsubst %.c, %.o, $(SRC))
 
 exe: $(OBJ)
