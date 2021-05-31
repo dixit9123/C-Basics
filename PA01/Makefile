@@ -17,5 +17,8 @@ mem:
 debug:
 	gdb exe
 
+fileComp:
+	diff examples/15sa.b output.b
+
 clean: 
 	rm exe *.o

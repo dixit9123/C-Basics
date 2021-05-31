@@ -3,6 +3,8 @@
 
 int test2p3q();
 int testLoadArr();
+int testSaveArr();
+int testArrShellSort();
 
 int main()
 {
@@ -10,6 +12,8 @@ int main()
     printf("What do you want to test out\n");
     printf("1: Test 2p3q Seqence\n");
     printf("2: Test Load Arr\n");
+    printf("3: Test Save Arr\n");
+    printf("4: Test Shell Sort Arr");
     //printf("3: for Linked List Sort\n");
     scanf("%d",&stage);
 
@@ -21,6 +25,17 @@ int main()
     if(stage==2)
     {
         testLoadArr();
+        return 0;
+    }
+    
+    if(stage==3)
+    {
+        testSaveArr();
+        return 0;
+    }
+    if(stage==4)
+    {
+        testArrShellSort();
         return 0;
     }
     return 0;
@@ -52,7 +67,29 @@ int testLoadArr()
          printf("%ld\n", arr[i]);
     }*/
     printf("Size of Array: %d\n", *size);
+    free(arr);
     free(size);
     return 0;
 
+}
+
+int testSaveArr()
+{
+    int *size=malloc(sizeof(int));
+    long *arr = Array_Load_From_File("examples/15.b", size);
+    Array_Save_To_File("output.b", arr, *size);
+    free(arr);
+    free(size);
+    return 0;
+}
+
+int testArrShellSort()
+{
+    int *size = malloc(sizeof(int));
+    long *comps=malloc(sizeof(long));
+
+    long *array=Array_Load_From_File("examples/15.b", size);
+    Array_Shellsort(array, *size, comps);
+    Array_Save_To_File("output.b", array, *size);
+    return 0;
 }
