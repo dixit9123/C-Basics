@@ -1,5 +1,5 @@
-SRC=main.c sequence.c shell_array.c
-HDR=sequence.h shell_array.h
+SRC=main.c sequence.c shell_array.c shell_list.c
+HDR=sequence.h shell_array.h shell_list.h
 OBJ=$(patsubst %.c, %.o, $(SRC))
 
 exe: $(OBJ)
@@ -18,7 +18,7 @@ debug:
 	gdb exe
 
 fileComp:
-	diff examples/15sa.b output.b
+	diff examples/15sa.b output15.b
 
 clean: 
 	rm exe *.o

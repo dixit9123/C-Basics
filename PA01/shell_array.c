@@ -56,38 +56,61 @@ int Array_Save_To_File(char *filename, long *array, int size)
 
 void Array_Shellsort(long *array, int size, long *n_comp)
 {
-    //takes in array of long and sorts them
-    //size: size of array
-    //n_comp: number of comparisons
-    //call 2p3q to get sequence and sequence size
-    int *seq_size=malloc(sizeof(int));
-    long *seq = Generate_2p3q_Seq(size, seq_size);
-    int k;
-    long temp;
-    printf("Arr before sort: \n");
-    printArr(array, size);
-    for(int i=0; i<*seq_size; i++)
+    /*Parameters: 
+        array: sequence we need to sort
+        size: size of array
+        n_comp: int we are sending back as number of comparsions
+    
+    Tasks:
+        Call 2p3q for sequence and sort
+    //Take insertion sort and from there adapt it to be shell sort
+    */
+    int * seq_size = malloc(sizeof(int));
+    long *seq  = Generate_2p3q_Seq(size, seq_size);
+    long temp, gap;
+
+    for(int x=0; x<*seq_size; x++)
     {
-        k=seq[i];
-        for(int j=k; j<size; j++)
+        gap = seq[x];
+        for(int i=gap;i<size; i++)
         {
-            temp=array[j];
-            i=j;
-            while(i>=k&&array[i-k]>temp)
+            temp=array[i];
+            int j;
+            for(j=i; j>=gap &&array[j-gap] > temp; j-=gap)
             {
-                (*n_comp)+=2;
-                array[i]=array[i-k];
-                i=i-k;
+                array[j]=array[j-gap];
             }
-            (*n_comp)++;
-            array[i]=temp;
+            array[j] = temp;
         }
     }
-    printf("Comp= %ld\n", *n_comp);
-    printf("Arr after sort:\n");
-    printArr(array, size);
-    //printf("Comp= %ld", *n_comp);
 
+
+
+
+
+
+/*    for(int i =0; i<*seq_size; i++)
+    {
+        printf("I: %d\n",i);
+        k =seq[i];
+        //printf("gap=%ld", gap);
+        printf("K: %d\n",k);
+        for (int j = k; i < size-1; i++) {
+            temp = array[j];
+            i=j;
+            printf("J: %d", j);
+             Move elements of arr[0..i-1], that are
+            greater than key, to one position ahead
+            of their current position 
+            while (i >= k && array[i-k] > temp) {
+                (*n_comp)++;
+                array[i] = array[i-k];
+                i = i - k;
+            }
+            array[i] = temp;
+        }
+    }*/
+    printArr(array, size);
 }
 
 void swap(int *a, int *b)

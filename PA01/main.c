@@ -1,11 +1,20 @@
 #include "sequence.h"
 #include "shell_array.h"
+#include "shell_list.h"
 
 int test2p3q();
 int testLoadArr();
 int testSaveArr();
 int testArrShellSort();
+int testLoadList();
+int testListToFile();
+int testArray();
 
+/*
+This is meant to be used as a tester function for the projects
+    We give you the option of choosing which function to test 
+    and debugging/testing different values happens here
+*/
 int main()
 {
     int stage=0;
@@ -13,7 +22,9 @@ int main()
     printf("1: Test 2p3q Seqence\n");
     printf("2: Test Load Arr\n");
     printf("3: Test Save Arr\n");
-    printf("4: Test Shell Sort Arr");
+    printf("4: Test Shell Sort Arr\n");
+    printf("5: Test Load Linked List\n");
+    printf("6: Test Whole Array Part\n");
     //printf("3: for Linked List Sort\n");
     scanf("%d",&stage);
 
@@ -38,8 +49,19 @@ int main()
         testArrShellSort();
         return 0;
     }
+    if(stage==5)
+    {
+        testLoadList();
+        return 0;
+    }
+    if(stage==6)
+    {
+        testArray();
+    }
     return 0;
 }
+
+//Testing 2p3q in sequence.c
 
 int test2p3q()
 {
@@ -56,6 +78,7 @@ int test2p3q()
     return 0;
 }
 
+//Testing Array from File
 int testLoadArr()
 {
     int *size=malloc(sizeof(int));
@@ -73,6 +96,7 @@ int testLoadArr()
 
 }
 
+//Testing writing to file from Array
 int testSaveArr()
 {
     int *size=malloc(sizeof(int));
@@ -83,13 +107,62 @@ int testSaveArr()
     return 0;
 }
 
+//Testing shell sort for array
+
 int testArrShellSort()
 {
     int *size = malloc(sizeof(int));
     long *comps=malloc(sizeof(long));
 
-    long *array=Array_Load_From_File("examples/15.b", size);
+    long *array=Array_Load_From_File("examples/1K.b", size);
     Array_Shellsort(array, *size, comps);
     Array_Save_To_File("output.b", array, *size);
+    return 0;
+}
+
+int testLoadList()
+{
+    Node *head=List_Load_From_File("examples/15.b");
+    Node* list=head;
+    printf("values\n");
+    while(list!=NULL)
+    {
+        printf("%ld\n", list->value);
+        list=list->next;
+    }
+    destroyTree(head);
+    return 0;
+}
+
+int testListToFile()
+{
+    return 0;
+}
+
+
+int testArray()
+{
+    int     *size = malloc(sizeof(int));
+    int     *size2 = malloc(sizeof(int));
+    long    *comps=malloc(sizeof(long));
+    char    *filenameAnswer = "examples/15sa.b";
+    char    *filenameOutput = "output15.b";
+    char    *filenameInput = "examples/15.b";
+
+    long *array=Array_Load_From_File(filenameInput, size);
+    Array_Shellsort(array, *size, comps);
+    printf("Number of computations is: %ld\n", *comps);
+    long *arrayAns=Array_Load_From_File(filenameAnswer, size2);
+
+    for(int i=0; i<*size;i++)
+    {
+        if(arrayAns[i]!=array[i])
+        {
+            printf("Index: %d is different\n", i);
+            printf("Array[%d]=%ld and ArrayAns[%d]=%ld\n", i, array[i], i, arrayAns[i]);
+        }
+    }
+    printf("Saved to file %s\n", filenameOutput);
+    Array_Save_To_File(filenameOutput, array, *size);
     return 0;
 }
