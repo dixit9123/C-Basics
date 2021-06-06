@@ -14,28 +14,45 @@ long *Generate_2p3q_Seq(int n, int *seq_size)
     int     power2and3=1;       //tracking powers of 3
     long    *arr;               //array returning
 
-    if(n==0)                    //if current array is 0
-    { 
-        *seq_size=0;            //return 0 for seq size and NULL for arr
-        return NULL;
+
+
+    if((n==0)||(n==1))                               //if current array is 0
+    {                                           //return 0 for seq size and NULL for arr
+        *seq_size=0;                            
+        arr = malloc(sizeof(long));
+        
+        if(arr==NULL)                           //if malloc fails
+        {
+            *seq_size=0;
+            return NULL;
+        }
+        return arr;
     } 
-    while(n>power2)             //this loop is used to find size of arr
-    {
-        (*seq_size)++;          
-        power2and3=power2;
-        while(n > power2and3)   //multiply by 3 and increment seq_size until n is bigger
+
+
+    while(n>power2)                     //first pass of this seqence we must find the size 
+    {                                   //second pass we fill the array 
+        (*seq_size)++;               
+        power2and3=power2;              
+
+        while(n > power2and3)         
         {
             power2and3*=3;
+
             if(n > power2and3)
             {
                 (*seq_size)++;
             }
         }
-        power2*=2;              //increment power of 2
+        power2*=2;            
     }
-    power2=1;       //reseting variables
+
+
+    power2=1;    
     power2and3=1;
-    arr=malloc(sizeof(long)*(*seq_size));   //use seq_size found above to allocate memory for array
+
+
+    arr= malloc(sizeof(long)*(*seq_size));
 
     if(arr==NULL)       //if malloc fails
     {
@@ -45,7 +62,7 @@ long *Generate_2p3q_Seq(int n, int *seq_size)
     }
 
     int index=0;
-    while(n>power2)             //repeat of loop from before but to fill array
+    while(n>power2)            
     {
         arr[index]=power2;
         index++;
@@ -74,7 +91,7 @@ void sort(long *arr, int n)     //selection sort
         min=i;
         for(int j=i+1; j<n; j++)
         {
-            if(arr[j]>arr[min])
+            if(arr[j]<arr[min])
             {
                 min = j;
             }

@@ -1,0 +1,57 @@
+ for(int x=0; x<*seq_size; x++)
+    {
+        gap = seq[x];
+        for(int i=gap;i<size; i++)
+        {
+            for(j=i; j>=gap; j-=gap)
+            {
+            }
+            array[j] = temp;
+        }
+    }
+
+
+
+
+               temp=array[i];
+               if (array[j-gap] > temp)
+               {
+                  array[j]=array[j-gap];
+                  (*n_comp)++;
+               }
+               else
+                  break;
+
+
+llist_swap_nodes(struct node *head, int a, int b)
+{
+  /* Assume the list is "protected" and a is always < b" */
+
+  struct node *t1, *t2;
+
+  if (a == b)
+    return;
+
+  assert(a < b);
+
+  t1 = (struct node *)NULL;
+  t2 = (struct node *)NULL;
+
+  if (a > 0)
+    t1 = advanceNode(a - 1);  /* A's predecessor */
+
+  t2 = advancenode(b - 1);    /* B's predecessor */
+  na = advanceNode(a);
+  nb = advanceNode(b);
+
+  if (t1 != NULL)
+    t1->next = nb;
+  t2->next = na;
+
+  t1       = nb->next;    /* Original node after b */
+  nb->next = na->next;    /* A's next becomes B's next */
+  na->next = t1;          /* A's next is now what was after B */
+
+  return;
+}
+

@@ -12,7 +12,6 @@ int List_Save_To_File(char *filename, Node *list);
 
 Node *List_Shellsort(Node *list, long *n_comp);
 
-void destroyTree(Node *list);
-
+Node *swap(Node *head, int a, int b);
 #endif
 
